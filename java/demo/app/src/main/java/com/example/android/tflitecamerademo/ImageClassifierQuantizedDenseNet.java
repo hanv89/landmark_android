@@ -1,4 +1,4 @@
-/* Copyright 2018 The TensorFlow Authors. All Rights Reserved.
+/* Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,25 +16,28 @@ limitations under the License.
 package com.example.android.tflitecamerademo;
 
 import android.app.Activity;
+
 import java.io.IOException;
 
-/** This classifier works with the float MobileNet model. */
-public class ImageClassifierFloatMobileNet extends ImageClassifier {
+/**
+ * This classifier works with the quantized MobileNet model.
+ */
+public class ImageClassifierQuantizedDenseNet extends ImageClassifier {
 
   /**
-   * An array to hold inference results, to be feed into Tensorflow Lite as outputs. This isn't part
-   * of the super class, because we need a primitive array here.
+   * An array to hold inference results, to be feed into Tensorflow Lite as outputs.
+   * This isn't part of the super class, because we need a primitive array here.
    */
-  private float[][] labelProbArray = null;
+  private byte[][] labelProbArray = null;
 
   /**
-   * Initializes an {@code ImageClassifierFloatMobileNet}.
+   * Initializes an {@code ImageClassifier}.
    *
    * @param activity
    */
-  ImageClassifierFloatMobileNet(Activity activity) throws IOException {
+  ImageClassifierQuantizedDenseNet(Activity activity) throws IOException {
     super(activity);
-    labelProbArray = new float[1][getNumLabels()];
+    labelProbArray = new byte[1][getNumLabels()];
   }
 
   @Override
@@ -42,7 +45,7 @@ public class ImageClassifierFloatMobileNet extends ImageClassifier {
     // you can download this file from
     // see build.gradle for where to obtain this file. It should be auto
     // downloaded into assets.
-    return "mobilenet_v2-20190302-113138.tflite";
+    return "quantized_densenet_169-20190223-105925.tflite";
   }
 
   @Override
@@ -62,14 +65,15 @@ public class ImageClassifierFloatMobileNet extends ImageClassifier {
 
   @Override
   protected int getNumBytesPerChannel() {
-    return 4; // Float.SIZE / Byte.SIZE;
+    // the quantized model uses a single byte only
+    return 1;
   }
 
   @Override
   protected void addPixelValue(int pixelValue) {
-    imgData.putFloat(((pixelValue >> 16) & 0xFF) / 255.f);
-    imgData.putFloat(((pixelValue >> 8) & 0xFF) / 255.f);
-    imgData.putFloat((pixelValue & 0xFF) / 255.f);
+    imgData.put((byte) ((pixelValue >> 16) & 0xFF));
+    imgData.put((byte) ((pixelValue >> 8) & 0xFF));
+    imgData.put((byte) (pixelValue & 0xFF));
   }
 
   @Override
@@ -79,12 +83,12 @@ public class ImageClassifierFloatMobileNet extends ImageClassifier {
 
   @Override
   protected void setProbability(int labelIndex, Number value) {
-    labelProbArray[0][labelIndex] = value.floatValue();
+    labelProbArray[0][labelIndex] = value.byteValue();
   }
 
   @Override
   protected float getNormalizedProbability(int labelIndex) {
-    return labelProbArray[0][labelIndex];
+    return (labelProbArray[0][labelIndex] & 0xff) / 255.0f;
   }
 
   @Override

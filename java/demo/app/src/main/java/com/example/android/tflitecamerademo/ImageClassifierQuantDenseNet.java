@@ -16,10 +16,13 @@ limitations under the License.
 package com.example.android.tflitecamerademo;
 
 import android.app.Activity;
+
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 /** This classifier works with the float MobileNet model. */
-public class ImageClassifierFloatMobileNet extends ImageClassifier {
+public class ImageClassifierQuantDenseNet extends ImageClassifier {
 
   /**
    * An array to hold inference results, to be feed into Tensorflow Lite as outputs. This isn't part
@@ -32,7 +35,7 @@ public class ImageClassifierFloatMobileNet extends ImageClassifier {
    *
    * @param activity
    */
-  ImageClassifierFloatMobileNet(Activity activity) throws IOException {
+  ImageClassifierQuantDenseNet(Activity activity) throws IOException {
     super(activity);
     labelProbArray = new float[1][getNumLabels()];
   }
@@ -42,7 +45,7 @@ public class ImageClassifierFloatMobileNet extends ImageClassifier {
     // you can download this file from
     // see build.gradle for where to obtain this file. It should be auto
     // downloaded into assets.
-    return "mobilenet_v2-20190302-113138.tflite";
+    return "quantized_densenet_169-20190223-105925.tflite";
   }
 
   @Override
@@ -62,7 +65,7 @@ public class ImageClassifierFloatMobileNet extends ImageClassifier {
 
   @Override
   protected int getNumBytesPerChannel() {
-    return 4; // Float.SIZE / Byte.SIZE;
+    return 1; // Float.SIZE / Byte.SIZE;
   }
 
   @Override

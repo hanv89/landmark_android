@@ -133,6 +133,7 @@ public class Camera2BasicFragment extends Fragment
   private String mobilenetV1Quant;
   private String mobilenetV1Float;
   private String densenetFloat;
+  private String densenetQuant;
 
 
 
@@ -356,6 +357,8 @@ public class Camera2BasicFragment extends Fragment
           classifier = new ImageClassifierFloatMobileNet(getActivity());
         } else if (model.equals(densenetFloat)) {
           classifier = new ImageClassifierFloatDenseNet(getActivity());
+        } else if (model.equals(densenetQuant)) {
+          classifier = new ImageClassifierQuantizedDenseNet(getActivity());
         } else {
           showToast("Failed to load model");
         }
@@ -395,6 +398,7 @@ public class Camera2BasicFragment extends Fragment
     mobilenetV1Quant = getString(R.string.mobilenetV1Quant);
     mobilenetV1Float = getString(R.string.mobilenetV1Float);
     densenetFloat = getString(R.string.densenetFloat);
+    densenetQuant = getString(R.string.densenetQuant);
 
     // Get references to widgets.
     textureView = (AutoFitTextureView) view.findViewById(R.id.texture);
@@ -404,8 +408,9 @@ public class Camera2BasicFragment extends Fragment
 
     // Build list of models
     modelStrings.add(densenetFloat);
-    modelStrings.add(mobilenetV1Quant);
     modelStrings.add(mobilenetV1Float);
+    modelStrings.add(densenetQuant);
+    modelStrings.add(mobilenetV1Quant);
 
     // Build list of devices
     int defaultModelIndex = 0;

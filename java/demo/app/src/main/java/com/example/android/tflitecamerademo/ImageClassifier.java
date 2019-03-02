@@ -53,12 +53,12 @@ public abstract class ImageClassifier {
   private static final String TAG = "TfLiteCameraDemo";
 
   /** Number of results to show in the UI. */
-  private static final int RESULTS_TO_SHOW = 3;
+  protected static final int RESULTS_TO_SHOW = 3;
 
   /** Dimensions of inputs. */
-  private static final int DIM_BATCH_SIZE = 1;
+  protected static final int DIM_BATCH_SIZE = 1;
 
-  private static final int DIM_PIXEL_SIZE = 3;
+  protected static final int DIM_PIXEL_SIZE = 3;
 
   /** Preallocated buffers for storing image data in. */
   private int[] intValues = new int[getImageSizeX() * getImageSizeY()];
