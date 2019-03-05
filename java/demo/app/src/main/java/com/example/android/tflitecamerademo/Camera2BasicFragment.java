@@ -407,10 +407,8 @@ public class Camera2BasicFragment extends Fragment
     modelView = (ListView) view.findViewById(R.id.model);
 
     // Build list of models
-    modelStrings.add(densenetFloat);
     modelStrings.add(mobilenetV1Float);
-    modelStrings.add(densenetQuant);
-    modelStrings.add(mobilenetV1Quant);
+    modelStrings.add(densenetFloat);
 
     // Build list of devices
     int defaultModelIndex = 0;
