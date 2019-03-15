@@ -33,5 +33,6 @@
     <string name="densenetQuant">densenet quant</string>
     <string name="xceptionFloat">xception</string>
     <string name="mobilenetV2Float">mobilenet</string>
+    <string name="nasnetFloat">nasnet</string>
 
 </resources>

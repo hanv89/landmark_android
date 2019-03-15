@@ -136,6 +136,8 @@ public class Camera2BasicFragment extends Fragment
   private String densenetQuant;
   private String xceptionFloat;
   private String mobilenetV2Float;
+  private String nasnetFloat;
+
 
 
 
@@ -358,11 +360,13 @@ public class Camera2BasicFragment extends Fragment
         } else if (model.equals(mobilenetV2Float)) {
           classifier = new ImageClassifierFloatMobileNet(getActivity());
         } else if (model.equals(densenetFloat)) {
-          classifier = new ImageClassifierFloatDenseNet(getActivity());
+          classifier = new ImageClassifierFloatResnet50(getActivity());
         } else if (model.equals(densenetQuant)) {
           classifier = new ImageClassifierQuantizedDenseNet(getActivity());
         } else if (model.equals(xceptionFloat)) {
-          classifier = new ImageClassifierFloatXception(getActivity());
+          classifier = new ImageClassifierFloatInceptionV3(getActivity());
+        } else if (model.equals(nasnetFloat)) {
+          classifier = new ImageClassifierFloatNASNet(getActivity());
         } else {
           showToast("Failed to load model");
         }
@@ -404,6 +408,7 @@ public class Camera2BasicFragment extends Fragment
     densenetFloat = getString(R.string.densenetFloat);
     densenetQuant = getString(R.string.densenetQuant);
     mobilenetV2Float = getString(R.string.mobilenetV2Float);
+    nasnetFloat = getString(R.string.nasnetFloat);
 
     xceptionFloat = getString(R.string.xceptionFloat);
     // Get references to widgets.
@@ -414,6 +419,7 @@ public class Camera2BasicFragment extends Fragment
 
     // Build list of models
     modelStrings.add(mobilenetV2Float);
+    modelStrings.add(nasnetFloat);
     modelStrings.add(densenetFloat);
     modelStrings.add(xceptionFloat);
 
