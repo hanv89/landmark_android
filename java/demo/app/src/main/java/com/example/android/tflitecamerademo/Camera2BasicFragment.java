@@ -133,10 +133,11 @@ public class Camera2BasicFragment extends Fragment
   private String mobilenetV1Quant;
   private String mobilenetV1Float;
   private String densenetFloat;
-  private String densenetQuant;
   private String xceptionFloat;
   private String mobilenetV2Float;
   private String nasnetFloat;
+  private String inceptionFloat;
+  private String resnetFloat;
 
 
 
@@ -361,12 +362,14 @@ public class Camera2BasicFragment extends Fragment
           classifier = new ImageClassifierFloatMobileNet(getActivity());
         } else if (model.equals(densenetFloat)) {
           classifier = new ImageClassifierFloatResnet50(getActivity());
-        } else if (model.equals(densenetQuant)) {
-          classifier = new ImageClassifierQuantizedDenseNet(getActivity());
         } else if (model.equals(xceptionFloat)) {
           classifier = new ImageClassifierFloatInceptionV3(getActivity());
         } else if (model.equals(nasnetFloat)) {
           classifier = new ImageClassifierFloatNASNet(getActivity());
+        } else if (model.equals(inceptionFloat)) {
+          classifier = new ImageClassifierFloatInceptionV3(getActivity());
+        } else if (model.equals(resnetFloat)) {
+          classifier = new ImageClassifierFloatResnet50(getActivity());
         } else {
           showToast("Failed to load model");
         }
@@ -406,9 +409,10 @@ public class Camera2BasicFragment extends Fragment
     mobilenetV1Quant = getString(R.string.mobilenetV1Quant);
     mobilenetV1Float = getString(R.string.mobilenetV1Float);
     densenetFloat = getString(R.string.densenetFloat);
-    densenetQuant = getString(R.string.densenetQuant);
     mobilenetV2Float = getString(R.string.mobilenetV2Float);
     nasnetFloat = getString(R.string.nasnetFloat);
+    inceptionFloat = getString(R.string.inceptionFloat);
+    resnetFloat = getString(R.string.resnetFloat);
 
     xceptionFloat = getString(R.string.xceptionFloat);
     // Get references to widgets.
@@ -422,6 +426,8 @@ public class Camera2BasicFragment extends Fragment
     modelStrings.add(nasnetFloat);
     modelStrings.add(densenetFloat);
     modelStrings.add(xceptionFloat);
+    modelStrings.add(inceptionFloat);
+    modelStrings.add(resnetFloat);
 
     // Build list of devices
     int defaultModelIndex = 0;
