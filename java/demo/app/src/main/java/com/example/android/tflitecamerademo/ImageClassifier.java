@@ -47,7 +47,7 @@ import org.tensorflow.lite.Interpreter;
 public abstract class ImageClassifier {
   // Display preferences
   private static final float GOOD_PROB_THRESHOLD = 0.3f;
-  private static final int SMALL_COLOR = 0xffddaa88;
+//  private static final int SMALL_COLOR = 0x34495e;
 
   /** Tag for the {@link Log}. */
   private static final String TAG = "TfLiteCameraDemo";
@@ -262,7 +262,7 @@ public abstract class ImageClassifier {
       if (label.getValue() > GOOD_PROB_THRESHOLD) {
         color = android.graphics.Color.WHITE;
       } else {
-        color = SMALL_COLOR;
+        color = android.graphics.Color.LTGRAY;
       }
       // Make first item bigger.
       if (i == size - 1) {
