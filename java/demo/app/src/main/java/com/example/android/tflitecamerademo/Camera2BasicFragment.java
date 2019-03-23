@@ -424,10 +424,10 @@ public class Camera2BasicFragment extends Fragment
     // Build list of models
     modelStrings.add(mobilenetV2Float);
     modelStrings.add(nasnetFloat);
-    modelStrings.add(densenetFloat);
-    modelStrings.add(xceptionFloat);
-    modelStrings.add(inceptionFloat);
-    modelStrings.add(resnetFloat);
+//    modelStrings.add(densenetFloat);
+//    modelStrings.add(xceptionFloat);
+//    modelStrings.add(inceptionFloat);
+//    modelStrings.add(resnetFloat);
 
     // Build list of devices
     int defaultModelIndex = 0;

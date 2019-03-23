@@ -43,7 +43,7 @@ public class ImageClassifierFloatNASNet extends ImageClassifier {
     // you can download this file from
     // see build.gradle for where to obtain this file. It should be auto
     // downloaded into assets.
-    return "nasnetmobile-20190312-123704.tflite";
+    return "nasnetmobile.tflite";
   }
 
   @Override
